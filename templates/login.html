@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Entrar</h2>
+<form method="POST" action="{{ url_for('auth.login') }}">
+    <label for="username">Usuário:</label>
+    <input type="text" id="username" name="username" required>
+    <br>
+    <label for="password">Senha:</label>
+    <input type="password" id="password" name="password" required>
+    <br>
+    <input type="submit" value="Entrar">
+</form>
+{% endblock %}

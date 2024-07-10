@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Bem-vindo à Loja Vulnerável</h2>
+<p>Esta loja existe vulnerabilidades.</p>
+
+<div class="products">
+    {% for produto in produtos %}
+    <div class="product">
+        <img src="{{ produto[3] }}" alt="{{ produto[0] }}">
+        <h3>{{ produto[0] }}</h3>
+        <p>{{ produto[1] }}</p>
+        <p><strong>{{ produto[2] }}</strong></p>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
