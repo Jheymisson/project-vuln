@@ -2,6 +2,31 @@
 
 {% block content %}
 <h2>Painel de Administração</h2>
-<p>Bem-vindo, {{ session['username'] }}!</p>
-<p>Esta é a seção de administração.</p>
+<h3>Gerenciar Usuários</h3>
+
+<form method="POST" action="{{ url_for('admin.adicionar_usuario') }}">
+    <label for="username">Usuário:</label>
+    <input type="text" id="username" name="username" required>
+    <br>
+    <label for="password">Senha:</label>
+    <input type="password" id="password" name="password" required>
+    <br>
+    <label for="role">Papel:</label>
+    <select id="role" name="role" required>
+        <option value="admin">Admin</option>
+        <option value="vendedor">Vendedor</option>
+        <option value="cliente">Cliente</option>
+    </select>
+    <br>
+    <input type="submit" value="Adicionar Usuário">
+</form>
+
+<h3>Lista de Usuários</h3>
+<ul>
+    {% for user in usuarios %}
+    <li>{{ user[1] }} - {{ user[3] }}
+        <a href="{{ url_for('admin.remover_usuario', user_id=user[0]) }}">Remover</a>
+    </li>
+    {% endfor %}
+</ul>
 {% endblock %}

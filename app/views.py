@@ -7,7 +7,7 @@ bp = Blueprint('views', __name__)
 def index():
     conn = sqlite3.connect('database.db')
     c = conn.cursor()
-    c.execute('SELECT nome, descricao, preco, imagem FROM produtos')
+    c.execute('SELECT id, nome, descricao, preco, imagem FROM produtos')
     produtos = c.fetchall()
     conn.close()
     return render_template('index.html', produtos=produtos)

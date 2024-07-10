@@ -2,6 +2,34 @@
 
 {% block content %}
 <h2>Painel do Vendedor</h2>
-<p>Bem-vindo, {{ session['username'] }}!</p>
-<p>Esta é a seção do vendedor.</p>
+<h3>Gerenciar Produtos</h3>
+
+<form method="POST" action="{{ url_for('vendedor.adicionar_produto') }}">
+    <label for="nome">Nome do Produto:</label>
+    <input type="text" id="nome" name="nome" required>
+    <br>
+    <label for="descricao">Descrição:</label>
+    <input type="text" id="descricao" name="descricao" required>
+    <br>
+    <label for="preco">Preço:</label>
+    <input type="text" id="preco" name="preco" required>
+    <br>
+    <label for="imagem">URL da Imagem:</label>
+    <input type="text" id="imagem" name="imagem" required>
+    <br>
+    <input type="submit" value="Adicionar Produto" class="btn">
+</form>
+
+<h3>Lista de Produtos</h3>
+<div class="product-list">
+    {% for produto in produtos %}
+    <div class="product-item">
+        <img src="{{ produto[4] }}" alt="{{ produto[1] }}">
+        <h3>{{ produto[1] }}</h3>
+        <p>{{ produto[2] }}</p>
+        <p><strong>{{ produto[3] }}</strong></p>
+        <a href="{{ url_for('vendedor.remover_produto', produto_id=produto[0]) }}" class="btn">Remover</a>
+    </div>
+    {% endfor %}
+</div>
 {% endblock %}

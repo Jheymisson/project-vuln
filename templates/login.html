@@ -2,7 +2,7 @@
 
 {% block content %}
 <h2>Entrar</h2>
-<form method="POST" action="{{ url_for('auth.login') }}">
+<form method="POST" action="{{ url_for('auth.login', next=next) }}">
     <label for="username">Usuário:</label>
     <input type="text" id="username" name="username" required>
     <br>

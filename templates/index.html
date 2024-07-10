@@ -2,15 +2,16 @@
 
 {% block content %}
 <h2>Bem-vindo à Loja Vulnerável</h2>
-<p>Esta loja existe vulnerabilidades.</p>
+<p>Esta é uma demonstração de uma vulnerabilidade de Controle de Acesso Quebrado.</p>
 
 <div class="products">
     {% for produto in produtos %}
     <div class="product">
-        <img src="{{ produto[3] }}" alt="{{ produto[0] }}">
-        <h3>{{ produto[0] }}</h3>
-        <p>{{ produto[1] }}</p>
-        <p><strong>{{ produto[2] }}</strong></p>
+        <img src="{{ produto[4] }}" alt="{{ produto[1] }}">
+        <h3>{{ produto[1] }}</h3>
+        <p>{{ produto[2] }}</p>
+        <p><strong>{{ produto[3] }}</strong></p>
+        <a href="{{ url_for('compra.compra', produto_id=produto[0]) }}" class="btn">Comprar</a>
     </div>
     {% endfor %}
 </div>

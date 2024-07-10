@@ -1,0 +1,50 @@
+# Arquivos temporários ou gerados
+*~
+*.swp
+*.log
+
+# Arquivos de configuração local
+.env
+config.js
+
+# Diretórios gerados
+/node_modules
+/dist
+/build
+
+# Arquivos de compilação ou build
+*.class
+*.war
+*.jar
+/target
+
+# Arquivos específicos de IDEs
+.idea/
+.vscode/
+
+# Arquivos de logs
+/logs
+*.log*
+
+# Arquivos de sistema
+.DS_Store
+Thumbs.db
+
+# Arquivos de byte compilados Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Arquivos de ambiente virtual
+venv/
+.env
+
+# Pacotes instalados via pip
+pip-log.txt
+requirements.txt
+
+# Arquivos de cobertura ou resultados de testes
+.coverage
+.coverage.*
+nosetests.xml

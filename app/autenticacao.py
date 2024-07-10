@@ -5,6 +5,7 @@ bp = Blueprint('auth', __name__)
 
 @bp.route('/login', methods=['GET', 'POST'])
 def login():
+    next_url = request.args.get('next')
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
@@ -16,6 +17,8 @@ def login():
         if user:
             session['username'] = user[1]
             session['role'] = user[3]
+            if next_url:
+                return redirect(next_url)
             if user[3] == 'admin':
                 return redirect(url_for('admin.admin_dashboard'))
             elif user[3] == 'vendedor':
@@ -24,9 +27,9 @@ def login():
                 return redirect(url_for('cliente.cliente_dashboard'))
         else:
             return 'Credenciais inválidas'
-    return render_template('login.html')
+    return render_template('login.html', next=next_url)
 
 @bp.route('/logout')
 def logout():
     session.clear()
-    return redirect(url_for('views.index'))
+    return redirect(url_for('auth.login'))

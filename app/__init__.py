@@ -12,7 +12,7 @@ def create_app():
         app.register_blueprint(views.bp)
 
         from . import autenticacao
-        app.register_blueprint(autenticacao.bp)
+        app.register_blueprint(autenticacao.bp, url_prefix='/auth')
 
         from .usuarios import admin
         app.register_blueprint(admin.bp)
@@ -22,5 +22,8 @@ def create_app():
 
         from .usuarios import cliente
         app.register_blueprint(cliente.bp)
+
+        from . import compra
+        app.register_blueprint(compra.bp)
 
     return app
