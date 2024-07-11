@@ -15,7 +15,6 @@ def compra(produto_id):
     conn.close()
 
     if request.method == 'POST':
-        # Processamento básico da compra
         return redirect(url_for('views.index'))
 
     return render_template('compra.html', produto=produto)

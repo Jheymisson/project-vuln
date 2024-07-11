@@ -4,24 +4,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Loja Vulnerável</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/estilo.css') }}">
 </head>
 <body>
-    <header>
+    <header class="bg-dark text-white text-center py-3">
         <h1>Loja Vulnerável</h1>
         <nav>
-            <ul>
-                <li><a href="{{ url_for('views.index') }}">Início</a></li>
+            <ul class="nav justify-content-center">
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="{{ url_for('views.index') }}">Início</a>
+                </li>
                 {% if session.get('username') %}
-                <li><a href="{{ url_for('auth.logout') }}">Sair</a></li>
+                    {% if session.get('role') == 'admin' %}
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{{ url_for('auth.admin_dashboard') }}">Painel do Administrador</a>
+                    </li>
+                    {% elif session.get('role') == 'vendedor' %}
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{{ url_for('auth.vendedor_dashboard') }}">Painel do Vendedor</a>
+                    </li>
+                    {% elif session.get('role') == 'cliente' %}
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{{ url_for('auth.cliente_dashboard') }}">Painel do Cliente</a>
+                    </li>
+                    {% endif %}
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="{{ url_for('auth.logout') }}">Sair</a>
+                </li>
                 {% else %}
-                <li><a href="{{ url_for('auth.login') }}">Entrar</a></li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="{{ url_for('auth.login') }}">Entrar</a>
+                </li>
                 {% endif %}
             </ul>
         </nav>
     </header>
-    <main>
+    <main class="container my-4">
         {% block content %}{% endblock %}
     </main>
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

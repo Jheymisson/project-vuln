@@ -1,12 +1,14 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h2>Painel do Cliente</h2>
-<h3>Meus Pedidos</h3>
-
-<ul>
-    {% for pedido in pedidos %}
-    <li>{{ pedido[1] }} - {{ pedido[2] }} - {{ pedido[3] }}</li>
-    {% endfor %}
-</ul>
+<div class="container">
+    <h2>Painel do Cliente</h2>
+    <h3>Meus Pedidos</h3>
+    <ul class="list-group">
+        {% for pedido in pedidos %}
+        <li class="list-group-item">{{ pedido[1] }} - {{ pedido[2] }} - R$ {{ pedido[3] }}</li>
+        {% endfor %}
+    </ul>
+    <a href="{{ url_for('auth.cliente_dashboard') }}" class="btn btn-primary mt-3">Voltar para o Painel do Cliente</a>
+</div>
 {% endblock %}

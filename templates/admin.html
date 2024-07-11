@@ -1,32 +1,38 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h2>Painel de Administração</h2>
-<h3>Gerenciar Usuários</h3>
+<div class="container">
+    <h2>Painel de Administração</h2>
+    <h3>Gerenciar Usuários</h3>
 
-<form method="POST" action="{{ url_for('admin.adicionar_usuario') }}">
-    <label for="username">Usuário:</label>
-    <input type="text" id="username" name="username" required>
-    <br>
-    <label for="password">Senha:</label>
-    <input type="password" id="password" name="password" required>
-    <br>
-    <label for="role">Papel:</label>
-    <select id="role" name="role" required>
-        <option value="admin">Admin</option>
-        <option value="vendedor">Vendedor</option>
-        <option value="cliente">Cliente</option>
-    </select>
-    <br>
-    <input type="submit" value="Adicionar Usuário">
-</form>
+    <form method="POST" action="{{ url_for('admin.adicionar_usuario') }}" class="mb-4">
+        <div class="form-group">
+            <label for="username">Usuário:</label>
+            <input type="text" id="username" name="username" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Senha:</label>
+            <input type="password" id="password" name="password" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="role">Papel:</label>
+            <select id="role" name="role" class="form-control" required>
+                <option value="admin">Admin</option>
+                <option value="vendedor">Vendedor</option>
+                <option value="cliente">Cliente</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Adicionar Usuário</button>
+    </form>
 
-<h3>Lista de Usuários</h3>
-<ul>
-    {% for user in usuarios %}
-    <li>{{ user[1] }} - {{ user[3] }}
-        <a href="{{ url_for('admin.remover_usuario', user_id=user[0]) }}">Remover</a>
-    </li>
-    {% endfor %}
-</ul>
+    <h3>Lista de Usuários</h3>
+    <ul class="list-group">
+        {% for user in usuarios %}
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            {{ user[1] }} - {{ user[3] }}
+            <a href="{{ url_for('admin.remover_usuario', user_id=user[0]) }}" class="btn btn-danger btn-sm">Remover</a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
 {% endblock %}

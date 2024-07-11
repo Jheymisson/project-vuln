@@ -1,16 +1,22 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h2>Compra do Produto</h2>
-<div class="product">
-    <img src="{{ produto[3] }}" alt="{{ produto[0] }}">
-    <h3>{{ produto[0] }}</h3>
-    <p>{{ produto[1] }}</p>
-    <p><strong>{{ produto[2] }}</strong></p>
+<div class="container">
+    <h2>Comprar Produto</h2>
+    <div class="card">
+        <img src="{{ produto[4] }}" class="card-img-top" alt="{{ produto[1] }}">
+        <div class="card-body">
+            <h5 class="card-title">{{ produto[1] }}</h5>
+            <p class="card-text">{{ produto[2] }}</p>
+            <p class="card-text"><strong>R$ {{ produto[3] }}</strong></p>
+            <form method="POST">
+                <div class="form-group">
+                    <label for="quantidade">Quantidade:</label>
+                    <input type="number" id="quantidade" name="quantidade" class="form-control" required>
+                </div>
+                <button type="submit" class="btn btn-success">Comprar</button>
+            </form>
+        </div>
+    </div>
 </div>
-<form method="POST">
-    <label for="quantidade">Quantidade:</label>
-    <input type="number" id="quantidade" name="quantidade" value="1" min="1" required>
-    <input type="submit" value="Comprar">
-</form>
 {% endblock %}

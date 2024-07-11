@@ -20,11 +20,11 @@ def login():
             if next_url:
                 return redirect(next_url)
             if user[3] == 'admin':
-                return redirect(url_for('admin.admin_dashboard'))
+                return redirect(url_for('auth.admin_dashboard'))
             elif user[3] == 'vendedor':
-                return redirect(url_for('vendedor.vendedor_dashboard'))
+                return redirect(url_for('auth.vendedor_dashboard'))
             elif user[3] == 'cliente':
-                return redirect(url_for('cliente.cliente_dashboard'))
+                return redirect(url_for('auth.cliente_dashboard'))
         else:
             return 'Credenciais inválidas'
     return render_template('login.html', next=next_url)
@@ -33,3 +33,21 @@ def login():
 def logout():
     session.clear()
     return redirect(url_for('auth.login'))
+
+@bp.route('/admin_dashboard')
+def admin_dashboard():
+    if session.get('role') != 'admin':
+        return 'Acesso negado'
+    return render_template('admin_dashboard.html')
+
+@bp.route('/vendedor_dashboard')
+def vendedor_dashboard():
+    if session.get('role') != 'vendedor':
+        return 'Acesso negado'
+    return render_template('vendedor_dashboard.html')
+
+@bp.route('/cliente_dashboard')
+def cliente_dashboard():
+    if session.get('role') != 'cliente':
+        return 'Acesso negado'
+    return render_template('cliente_dashboard.html')

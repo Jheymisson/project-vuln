@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h2>Compra Realizada com Sucesso</h2>
+    <p>Seu pedido foi adicionado com sucesso.</p>
+    <a href="{{ url_for('auth.cliente_dashboard') }}" class="btn btn-primary">Voltar para o Painel do Cliente</a>
+</div>
+{% endblock %}
