@@ -1,29 +1,30 @@
 from flask import Flask
+import os
 
 def create_app():
-    app = Flask(__name__, template_folder='../templates', static_folder='../static')
-    app.secret_key = 'supersecretkey'
+    app = Flask(__name__, template_folder=os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates'))
+    app.secret_key = 'sup3rs3cr3tk3y'
 
+    from .database import init_db
     with app.app_context():
-        from . import database
-        database.init_db()
+        init_db()
 
-        from . import views
-        app.register_blueprint(views.bp)
+    from app import admin
+    app.register_blueprint(admin.bp, url_prefix='/admin')
 
-        from . import autenticacao
-        app.register_blueprint(autenticacao.bp, url_prefix='/auth')
+    from app import vendedor
+    app.register_blueprint(vendedor.bp, url_prefix='/vendedor')
 
-        from .usuarios import admin
-        app.register_blueprint(admin.bp)
+    from app import cliente
+    app.register_blueprint(cliente.bp, url_prefix='/cliente')
 
-        from .usuarios import vendedor
-        app.register_blueprint(vendedor.bp)
+    from app import autenticacao
+    app.register_blueprint(autenticacao.bp, url_prefix='/auth')
 
-        from .usuarios import cliente
-        app.register_blueprint(cliente.bp)
+    from app.views import bp as views_bp
+    app.register_blueprint(views_bp)
 
-        from . import compra
-        app.register_blueprint(compra.bp)
+    from app import compra
+    app.register_blueprint(compra.bp, url_prefix='/compra')
 
     return app

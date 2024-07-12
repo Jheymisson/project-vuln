@@ -2,19 +2,38 @@
 
 {% block content %}
 <div class="container">
-    <h2>Comprar Produto</h2>
-    <div class="card">
-        <img src="{{ produto[4] }}" class="card-img-top" alt="{{ produto[1] }}">
-        <div class="card-body">
-            <h5 class="card-title">{{ produto[1] }}</h5>
-            <p class="card-text">{{ produto[2] }}</p>
-            <p class="card-text"><strong>R$ {{ produto[3] }}</strong></p>
-            <form method="POST">
+    <div class="row">
+        <div class="col-md-8">
+            <h2>Comprar Produto</h2>
+            <div class="card mb-4">
+                <img src="{{ produto[4] }}" class="card-img-top" alt="{{ produto[1] }}" style="width: 150px; height: 150px;">
+                <div class="card-body">
+                    <h5 class="card-title">{{ produto[1] }}</h5>
+                    <p class="card-text">{{ produto[2] }}</p>
+                    <p class="card-text"><strong>R$ {{ produto[3] }}</strong></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <h3>Informações de Compra</h3>
+            <form method="POST" action="{{ url_for('views.compra', produto_id=produto[0]) }}">
                 <div class="form-group">
                     <label for="quantidade">Quantidade:</label>
                     <input type="number" id="quantidade" name="quantidade" class="form-control" required>
                 </div>
-                <button type="submit" class="btn btn-success">Comprar</button>
+                <div class="form-group">
+                    <label for="endereco">Endereço:</label>
+                    <input type="text" id="endereco" name="endereco" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="pagamento">Tipo de Pagamento:</label>
+                    <select id="pagamento" name="pagamento" class="form-control" required>
+                        <option value="cartao_credito">Cartão de Crédito</option>
+                        <option value="boleto">Boleto</option>
+                        <option value="pix">PIX</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Comprar</button>
             </form>
         </div>
     </div>

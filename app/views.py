@@ -3,7 +3,6 @@ import sqlite3
 
 bp = Blueprint('views', __name__)
 
-
 @bp.route('/')
 def index():
     conn = sqlite3.connect('database.db')
@@ -11,8 +10,8 @@ def index():
     c.execute('SELECT * FROM produtos')
     produtos = c.fetchall()
     conn.close()
+    print("Rendering index.html with products:", produtos)
     return render_template('index.html', produtos=produtos)
-
 
 @bp.route('/compra/<int:produto_id>', methods=['GET', 'POST'])
 def compra(produto_id):
@@ -42,7 +41,6 @@ def compra(produto_id):
         return 'Produto não encontrado', 404
 
     return render_template('compra.html', produto=produto)
-
 
 @bp.route('/compra_sucesso')
 def compra_sucesso():
